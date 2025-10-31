@@ -25,6 +25,7 @@ pipeline {
             steps {
                 script {
                     echo "Deploy from ${env.BRANCH_NAME} branch"
+                    sh "docker compose -f ${COMPOSE_TEMPLATE_FILE} --project-name ${PROJECT_NAME} --env-file ${ENV_DIR} down"
                     sh "docker compose -f ${COMPOSE_TEMPLATE_FILE} --project-name ${PROJECT_NAME} --env-file ${ENV_DIR} up -d --remove-orphans"
                 }
             }

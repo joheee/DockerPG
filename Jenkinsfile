@@ -11,6 +11,11 @@ pipeline {
         PROJECT_NAME = 'dev_pg'
     }
     stages {
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
         stage('Checkout Code') {
             steps {
                 checkout scm

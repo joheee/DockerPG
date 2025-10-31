@@ -1,7 +1,6 @@
 services:
   pgadmin:
-    container_name: ${PGADMIN_CONTAINER_NAME}
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:latest
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
@@ -12,8 +11,7 @@ services:
       - network
 
   server:
-    container_name: ${SERVER_CONTAINER_NAME}
-    image: postgres
+    image: postgres:17
     restart: always
     environment:
       POSTGRES_USER: ${SERVER_USER}

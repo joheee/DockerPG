@@ -52,7 +52,7 @@ pipeline {
                 to: 'johevinblesstowi07@gmail.com',
                 subject: "JENKINS SUCCESS: Pipeline '${currentBuild.fullDisplayName}'",
                 mimeType: 'text/html',
-                body: """<p>SUCCESSFUL DEPLOYMENT: <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>
+                body: """<p>SUCCESSFUL DEPLOYMENT: <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>"""
             )
         }
     }

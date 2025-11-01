@@ -47,7 +47,6 @@ pipeline {
                          <p>Please check the console output for more details.</p>"""
             )
         }
-
         success {
             emailext (
                 to: 'johevinblesstowi07@gmail.com',

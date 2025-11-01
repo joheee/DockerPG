@@ -9,7 +9,6 @@ pipeline {
         COMPOSE_TEMPLATE_FILE = 'docker-compose.yml'
         ENV_DIR = 'env/dev.env'
         PROJECT_NAME = 'dev_pg'
-        EMAIL = 'johevinblesstowi07@gmail.com'
     }
     stages {
         stage('Clean Workspace') {
@@ -41,7 +40,7 @@ pipeline {
     post {
         failure {
             emailext (
-                to: '${EMAIL}', 
+                to: 'johevinblesstowi07@gmail.com', 
                 subject: "FAILED: Pipeline '${currentBuild.fullDisplayName}'",
                 body: """<p>CHECK FAILED PIPELINE: <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>
                          <p>The build for branch <b>${env.BRANCH_NAME}</b> has failed.</p>
@@ -51,7 +50,7 @@ pipeline {
 
         success {
             emailext (
-                to: '${EMAIL}',
+                to: 'johevinblesstowi07@gmail.com',
                 subject: "SUCCESS: Pipeline '${currentBuild.fullDisplayName}'",
                 body: """<p>SUCCESSFUL DEPLOYMENT: <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>
                          <p>The build for branch <b>${env.BRANCH_NAME}</b> was deployed successfully.</p>"""

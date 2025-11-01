@@ -42,6 +42,7 @@ pipeline {
             emailext (
                 to: 'johevinblesstowi07@gmail.com', 
                 subject: "FAILED: Pipeline '${currentBuild.fullDisplayName}'",
+                mimeType: 'text/html',
                 body: """<p>CHECK FAILED PIPELINE: <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>
                          <p>The build for branch <b>${env.BRANCH_NAME}</b> has failed.</p>
                          <p>Please check the console output for more details.</p>"""
@@ -51,6 +52,7 @@ pipeline {
             emailext (
                 to: 'johevinblesstowi07@gmail.com',
                 subject: "SUCCESS: Pipeline '${currentBuild.fullDisplayName}'",
+                mimeType: 'text/html',
                 body: """<p>SUCCESSFUL DEPLOYMENT: <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>
                          <p>The build for branch <b>${env.BRANCH_NAME}</b> was deployed successfully.</p>"""
             )

@@ -9,6 +9,7 @@ pipeline {
         COMPOSE_TEMPLATE_FILE = 'docker-compose.yml'
         ENV_DIR = 'env/dev.env'
         PROJECT_NAME = 'dev_pg'
+        EMAIL = 'johevinblesstowi07@gmail.com'
     }
     stages {
         stage('Clean Workspace') {
@@ -35,6 +36,26 @@ pipeline {
                 echo "Pruning unused Docker Images"
                 sh "docker image prune -f"
             }
+        }
+    }
+    post {
+        failure {
+            emailext (
+                to: '${EMAIL}', 
+                subject: "FAILED: Pipeline '${currentBuild.fullDisplayName}'",
+                body: """<p>CHECK FAILED PIPELINE: <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>
+                         <p>The build for branch <b>${env.BRANCH_NAME}</b> has failed.</p>
+                         <p>Please check the console output for more details.</p>"""
+            )
+        }
+
+        success {
+            emailext (
+                to: '${EMAIL}',
+                subject: "SUCCESS: Pipeline '${currentBuild.fullDisplayName}'",
+                body: """<p>SUCCESSFUL DEPLOYMENT: <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>
+                         <p>The build for branch <b>${env.BRANCH_NAME}</b> was deployed successfully.</p>"""
+            )
         }
     }
 }
